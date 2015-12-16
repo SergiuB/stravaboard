@@ -1,0 +1,23 @@
+{
+  "name": "stravaboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.3",
+    "passport": "^0.3.2",
+    "passport-strava-oauth2": "^0.1.3"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  }
+}
