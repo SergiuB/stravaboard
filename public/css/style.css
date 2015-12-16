@@ -1,0 +1,5 @@
+.loginBtn {
+  height: 30px;
+  width: 150px;
+  background-image: url('/images/LoginWithStrava.png');
+}
