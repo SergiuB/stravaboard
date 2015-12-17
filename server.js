@@ -17,7 +17,7 @@ export default function startServer() {
       Strava.getActivities().then(
         activities => res.send({
           'access token': StravaAuth.getToken(),
-          'activities': activities.map(activity => activity.name)
+          'activities': activities.map(activity => activity.id)
       }))
       .catch(err => res.send({
         'access token': StravaAuth.getToken(),
