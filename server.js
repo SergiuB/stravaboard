@@ -1,7 +1,11 @@
 import express from 'express';
 import swig from 'swig';
+import serveStatic from 'serve-static';
+import serveIndex from 'serve-index';
+
 import * as StravaAuth from './auth';
 import * as Strava from './strava';
+
 
 export default function startServer() {
   const app = express();
@@ -9,17 +13,24 @@ export default function startServer() {
   app.engine('html', swig.renderFile);
   app.set('view engine', 'html');
   app.set('views', __dirname + '/public/views');
-  app.use(express.static('public'));
+  app.use(serveStatic(__dirname + '/public'));
+  app.use('/public', serveIndex(__dirname + '/public'));
 
   StravaAuth.init(app);
   app.get('/', (req, res) => {
     if (StravaAuth.isAuthenticated()) {
       Strava.getActivities().then(
-        activities => res.send({
-          'access token': StravaAuth.getToken(),
-          'activities': activities.map(activity => activity.id)
-      }))
-      .catch(err => res.send({
+        activities => res.render('index', {
+          'title': 'Activities',
+          'activities': JSON.stringify(activities.map(activity => ({
+            id: activity.id,
+            name: activity.name,
+            type: activity.type,
+            startDate: activity.start_date,
+            movingTime: activity.moving_time
+          })))
+        })
+      ).catch(err => res.send({
         'access token': StravaAuth.getToken(),
         err
       }));
