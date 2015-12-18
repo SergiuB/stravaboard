@@ -1,8 +1,15 @@
 import passport from 'passport';
 import {Strategy as StravaStrategy} from 'passport-strava-oauth2';
-import oauthIds from './oauth';
 
 let credentials;
+
+const oauthIds = {
+  strava: {
+    clientID: '9244',
+    clientSecret: '94b8617916ead111be4ebf700ca1d610e2fb2ff0',
+    callbackURL: 'http://127.0.0.1:3000/auth/strava/callback'
+  }
+};
 
 let init = app => {
   passport.serializeUser(function(user, done) {
