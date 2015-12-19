@@ -1,10 +1,10 @@
 import React from 'react';
+import Activity from './Activity';
 
 let ActivityList = React.createClass({
   render: function() {
-    console.log(this.props.activities);
     var rows = this.props.activities.map(
-      activity => <div>{activity.id}, {activity.name}, {activity.date}</div>
+      activity => <Activity key={activity.id} activity={activity}/>
     );
     return <div>{rows}</div>;
   }

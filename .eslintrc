@@ -1,21 +1,24 @@
 {
-    "ecmaFeatures": {
-        "arrowFunctions": true,
-        "defaultParams": true,
-        "destructuring": true,
-        "classes": true,
-        "modules": true,
-        "blockBindings": true,
-        "forOf": true,
-        "jsx": true,
-        "templateStrings": true
-    },
-    "rules": {
-        "semi": 2
-    },
-    "env": {
-        "browser": true,
-        "node": true,
-        "mocha": true
-    }
+  "parser": "babel-eslint",
+  "ecmaFeatures": {
+      "arrowFunctions": true,
+      "defaultParams": true,
+      "destructuring": true,
+      "spread": true,
+      "classes": true,
+      "modules": true,
+      "blockBindings": true,
+      "forOf": true,
+      "jsx": true,
+      "templateStrings": true
+  },
+  "rules": {
+      "semi": 2
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true,
+    "es6": true
+  }
 }

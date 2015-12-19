@@ -1,8 +1,11 @@
 import express from 'express';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 import swig from 'swig';
 import serveStatic from 'serve-static';
 import serveIndex from 'serve-index';
 import session from 'express-session';
+import passport from 'passport';
 import fs from 'fs';
 
 import * as StravaPassport from './app/services/strava-passport';
@@ -14,11 +17,16 @@ app.set('view engine', 'html');
 app.set('views', __dirname + '/public/views');
 app.use(serveStatic(__dirname + '/public'));
 app.use('/public', serveIndex(__dirname + '/public'));
+app.use(cookieParser());
+app.use(bodyParser());
 app.use(session({
   secret: 'myapp',
   resave: false,
   saveUninitialized: false
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 StravaPassport.init(app);
 
