@@ -14,8 +14,9 @@ let Activity = React.createClass({
   },
   render: function() {
     var { activity, ...rest } = this.props;
+      console.log(activity);
     return <div {...rest}>
-      {activity.id}, {activity.name}, {activity.date}
+      {activity.startDate}, {activity.type}, {activity.name}
       <button type="button" onClick={this.saveActivity.bind(this, activity.id)}>Save</button>
     </div>;
   }
