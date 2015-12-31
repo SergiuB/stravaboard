@@ -31,10 +31,10 @@ app.use(passport.session());
 StravaPassport.init(app);
 
 // dynamically include routes (Controller)
-fs.readdirSync('./app/controllers').forEach(function (file) {
-  if(file.substr(-3) == '.js') {
-      var route = require('./app/controllers/' + file);
-      route.controller(app);
+fs.readdirSync('./app/controllers').forEach(function(file) {
+  if (file.substr(-3) == '.js') {
+    var route = require('./app/controllers/' + file);
+    route.controller(app);
   }
 });
 
