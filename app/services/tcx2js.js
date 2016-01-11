@@ -8,8 +8,8 @@ import _ from 'lodash-node';
 export default function parseTcx(xmlTcx) {
   return new Promise((resolve, reject) => {
     parseString(xmlTcx, (err, res) => {
-      if (err) {
-        reject(err);
+      if (err || !res) {
+        reject(err ? err : 'TCX empty or not valid');
       } else {
         resolve({
           activities: res.TrainingCenterDatabase.Activities.map(

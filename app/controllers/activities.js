@@ -6,7 +6,7 @@ import parseTcx from '../services/tcx2js';
 import {Activity} from '../models/models';
 
 function errorHandler (res) {
-  return (err) => res.status(500).send({err});
+  return (err) => res.status(500).send(err);
 }
 
 let controller = (app) => {
@@ -40,13 +40,13 @@ let controller = (app) => {
         const activityJs = tcxJs.activities[0]; // assuming only one activity in tcx
         Activity.find({_id: activityJs._id}, (err, activities) => {
           if (activities.length) {
-            res.status(500).send({err:`Activity ${activityJs._id} already in db`});
+            res.status(500).send(`Activity ${activityJs._id} already in db`);
           } else {
             const activity = new Activity(activityJs);
             activity.save(function (err) {
               if (err) {
                 console.log(err);
-                res.status(500).send({err:`Error saving activity ${activityJs._id}.`});
+                res.status(500).send(`Error saving activity ${activityJs._id}.`);
               }
               res.sendStatus(200);
             });
