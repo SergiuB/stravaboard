@@ -46,19 +46,15 @@ let getAllActivities = () => {
   });
 };
 
-let saveActivityTcx = (activityId, user) => {
+let saveActivityTcx = (activityId, email, password, user) => {
   return new Promise((resolve, reject) => {
     var jar, requestWCookie;
     if (!user.scrapingSession) {
       console.log(`user ${user} first time scraping`);
       // user not logged in using web scraping
       jar = request.jar();
-      requestWCookie = request.defaults({
-        jar
-      });
-      user.scrapingSession = {
-        jar
-      };
+      requestWCookie = request.defaults({jar});
+      user.scrapingSession = {jar};
 
       requestWCookie(
         `http://www.strava.com/activities/${activityId}/export_tcx`,
@@ -74,29 +70,24 @@ let saveActivityTcx = (activityId, user) => {
               utf8,
               authenticity_token,
               plan,
-              email: 'buciuc_sergiu@yahoo.com',
-                password: 'sergiu123'
+              email,
+              password
             },
             followAllRedirects: true
-          });
-          msg.pipe(fs.createWriteStream(`activity_${activityId}.tcx`));
-          msg.on('end', () => {
+          }, (err, response, body) => {
             console.log('done scraping');
-            resolve();
+            resolve(body);
           });
         });
     } else {
       console.log(`user ${user} already authenticated`);
       jar = user.scrapingSession.jar;
-      requestWCookie = request.defaults({
-        jar
-      });
+      requestWCookie = request.defaults({jar});
       let msg = requestWCookie(
-        `http://www.strava.com/activities/${activityId}/export_tcx`);
-      msg.pipe(fs.createWriteStream(`activity_${activityId}.tcx`));
-      msg.on('end', () => {
-        console.log('done scraping');
-        resolve();
+        `http://www.strava.com/activities/${activityId}/export_tcx`,
+        (err, response, body) => {
+          console.log('done scraping');
+          resolve(body);
       });
     }
   });

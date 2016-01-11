@@ -15,7 +15,7 @@ export default function parseTcx(xmlTcx) {
           activities: res.TrainingCenterDatabase.Activities.map(
             activity => ({
               type: _.get(activity, 'Activity[0].$.Sport'),
-              id: _.get(activity, 'Activity[0].Id[0]'),
+              _id: _.get(activity, 'Activity[0].Id[0]'),
               laps: _.get(activity, 'Activity[0].Lap', []).map(
                 lap => ({
                   startTime: _.get(lap, '$.StartTime'),

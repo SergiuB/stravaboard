@@ -7,6 +7,7 @@ import serveIndex from 'serve-index';
 import session from 'express-session';
 import passport from 'passport';
 import fs from 'fs';
+import mongoose from 'mongoose';
 
 import * as StravaPassport from './app/services/strava-passport';
 
@@ -44,3 +45,5 @@ const server = app.listen(3000, () => {
 
   console.log(`Listening on ${host}:${port}`);
 });
+
+mongoose.connect('mongodb://localhost/strava');
