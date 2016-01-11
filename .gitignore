@@ -30,3 +30,5 @@ node_modules
 
 public/bundle.js
 ciorna.js
+
+*.js.map

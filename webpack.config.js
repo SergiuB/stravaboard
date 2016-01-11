@@ -4,6 +4,7 @@ module.exports = {
   entry: [
     './public/index.jsx'
   ],
+  devtool: 'source-map',
   module: {
     loaders: [{
       test: /\.jsx?$/,

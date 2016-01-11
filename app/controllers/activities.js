@@ -10,14 +10,9 @@ function errorHandler (res) {
 }
 
 let controller = (app) => {
-  app.get('/', StravaPassport.loggedIn, (req, res) => {
-    Strava.getActivities().then(
-      activities => res.render('index', {
-        'title': 'Activities',
-        'activities': JSON.stringify(activities)
-      })
-    ).catch(errorHandler(res));
-  });
+  app.get('/', StravaPassport.loggedIn,
+    (req, res) => res.render('index', {'title': 'Activities'})
+  );
 
   app.get('/activities', StravaPassport.loggedIn, (req, res) => {
     let page = req.query.page;
