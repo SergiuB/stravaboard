@@ -22,8 +22,9 @@ let controller = (app) => {
   app.get('/activities', StravaPassport.loggedIn, (req, res) => {
     let page = req.query.page;
     let perPage = req.query.perPage;
+    let allFields = !!req.query.allFields;
 
-    Strava.getActivities(page, perPage).then(
+    Strava.getActivities(page, perPage, allFields).then(
       activities => res.send(activities)
     ).catch(errorHandler(res));
   });
