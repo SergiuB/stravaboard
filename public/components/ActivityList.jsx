@@ -8,7 +8,7 @@ let ActivityList = React.createClass({
     };
   },
   componentDidMount: function() {
-    fetch(`/activities/`, { method: 'get', credentials: 'same-origin'})
+    fetch(`/activities?allFields=true`, { method: 'get', credentials: 'same-origin'})
       .then(response => response.json())
       .then(activities => this.setState({activities}))
       .catch(err => console.log(err));

@@ -25,6 +25,12 @@ var lapSchema = new Schema({
 var activitySchema = new Schema({
   _id: String,
   type: String,
+  name: String,
+  distance: Number,
+  movingTime: Number,
+  elapsedTime: Number,
+  totalElevationGain: Number,
+  manual: Boolean,
   laps: [lapSchema]
 });
 
